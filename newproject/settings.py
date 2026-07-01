@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,6 +28,23 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Use custom User model from api app
+AUTH_USER_MODEL = 'api.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes= 21600),  # Access token expires in 10 minutes
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),     # Refresh token expires in 1 day
+    "ROTATE_REFRESH_TOKENS": False,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,                       # Uses the SECRET_KEY defined above
+    "AUTH_HEADER_TYPES": ("Bearer",),                # Header looks like: Authorization: Bearer <token>
+}
 
 # Application definition
 
@@ -39,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
