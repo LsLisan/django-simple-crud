@@ -1,7 +1,7 @@
-from django.urls import path, include
-from rest_framework_simplejwt.views import TokenRefreshView  # 🔄 Added for refreshing expired tokens
+from django.urls import path
+from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import create_user, get_all_users, get_user, login_user, update_user
+from .views import create_user, get_all_users, get_user, login_user, task_detail, task_list_create, update_user
 
 urlpatterns = [
     path('user/<int:user_id>/', get_user, name='get_user'),
@@ -10,6 +10,7 @@ urlpatterns = [
     path('user/update/<int:user_id>/', update_user, name='update_user'),
     path('delete/user/<int:user_id>/', update_user, name='delete_user'),
     path('login/', login_user, name='login_user'),
-    
+    path('tasks/', task_list_create, name='task_list_create'),
+    path('tasks/<int:task_id>/', task_detail, name='task_detail'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
