@@ -23,6 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-(g65=4e^g62dc_lh)8p@^t2qhiv(@y0ham7$b6$8bf7ntb70+j'
 
+# Default primary key field type for Django models
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

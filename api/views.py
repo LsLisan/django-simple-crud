@@ -1,4 +1,5 @@
 import json
+from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -7,6 +8,20 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import Todo, User
 from .serializer import TodoSerializer, UserSerializer
+
+
+@api_view(['GET'])
+def api_root(request):
+    return JsonResponse({
+        'message': 'Welcome to the API',
+        'endpoints': [
+            '/api/user/create/',
+            '/api/login/',
+            '/api/all/users/',
+            '/api/user/<id>/',
+            '/api/tasks/',
+        ]
+    })
 
 
 @api_view(['GET'])
